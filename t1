@@ -1,0 +1,13 @@
+.model small
+.code
+mov ah 2
+mov dl 65
+mov bl 70
+L:
+int 33
+add dl 1
+cmp dl bl
+jl L
+mov ah 76
+int 33
+end
