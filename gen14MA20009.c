@@ -56,13 +56,13 @@ int main(void) {
     }
     if (strcmp(t, "int") == 0) {
       fscanf(inpF, "%d", &g);
-      i = i+2;
+      i += 2;
       mcodes[j++] = 205;
       mcodes[j++] = g;
     }
     if (strcmp(t, "jc") == 0) {
       fscanf(inpF, "%s", u);
-      i = i+2;
+      i += 2;
       mcodes[j++] = 114;
       if (sy[u[0]] == -1) {
         fjump[u[0]] = j++;
@@ -72,25 +72,25 @@ int main(void) {
     }
     if (strcmp(t, "jmp") == 0) {
       fscanf(inpF, "%s", u);
-      i = i+2;
+      i += 2;
       mcodes[j++] = 235;
       mcodes[j++] = sy[u[0]] - i;
     }
     if (strcmp(t, "jl") == 0) {
       fscanf(inpF, "%s", u);
-      i = i+2;
+      i += 2;
       mcodes[j++] = 124;
       mcodes[j++] = sy[u[0]] - i;
     }
     if (strcmp(t, "add") == 0) {
       fscanf(inpF, "%s%s", u, v);
       if (v[0] >= '0' && v[0] <= '9') {
-        i = i+3;
+        i += 3;
         mcodes[j++] = 128;
         mcodes[j++] = 192 + f(u);
         mcodes[j++] = atoi(v);
       } else {
-        i = i+2;
+        i += 2;
         mcodes[j++] = 2;
         mcodes[j++] = 192 + f(u)*8 + f(v);
       }
@@ -98,12 +98,12 @@ int main(void) {
     if (strcmp(t, "cmp") == 0) {
       fscanf(inpF, "%s%s", u, v);
       if (v[0] >= '0' && v[0] <= '9') {
-        i = i+3;
+        i += 3;
         mcodes[j++] = 128;
         mcodes[j++] = 248 + f(u);
         mcodes[j++] = atoi(v);
       } else {
-        i = i+2;
+        i += 2;
         mcodes[j++] = 58;
         mcodes[j++] = 192 + f(u)*8 + f(v);
       }
@@ -111,7 +111,7 @@ int main(void) {
     if (strcmp(t, "mov") == 0) {
       fscanf(inpF, "%s%s", u, v);
       if (f(u) < 8) {
-        i = i+2;
+        i += 2;
         if (f(v) < 200) {
           mcodes[j++] = 138;
           mcodes[j++] = 192 + f(u)*8 + f(v);
@@ -121,11 +121,11 @@ int main(void) {
         }
       } else {
         if (f(v) < 200) {
-          i = i+2;
+          i += 2;
           mcodes[j++] = 139;
           mcodes[j++] = 192 + (f(u)-8)*8 + f(v)-8;
         } else {
-          i = i+3;
+          i += 3;
           mcodes[j++] = 184 + f(u)-8;
           mcodes[j++] = (atoi(v) % 256);
           mcodes[j++] = (atoi(v) / 256);
